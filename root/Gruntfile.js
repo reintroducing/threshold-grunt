@@ -7,6 +7,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-autoprefixer');
 
     // initialize the configuration
     grunt.initConfig({
@@ -45,6 +46,7 @@ module.exports = function(grunt) {
             },
             livereload: {
                 files: ['<%= files.css %>/**/*.css'],
+                tasks: ['autoprefixer'],
                 options: {
                     livereload: true
                 }
@@ -74,6 +76,15 @@ module.exports = function(grunt) {
                     outputStyle: 'expanded',
                     debugInfo: true
                 }
+            }
+        },
+
+        autoprefixer: {
+            options: {
+                browsers: ['last 2 versions', '> 1%', 'ie 8']
+            },
+            prefix: {
+                '<%= files.css %>/main.css': '<%= files.css %>/main.css'
             }
         },
 

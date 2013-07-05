@@ -23,6 +23,14 @@ At the command-line, cd into an empty directory and run this command:
 grunt-init threshold
 ```
 
+Next, install all the packages that Grunt needs to function correctly:
+
+```
+npm install
+```
+
+_You may need to use sudo depending on your setup._
+
 You should now have a great starting point to begin coding without having to mess with setting up a build script or directory structure/files.
 
 _Note that this template will generate files in the current directory, so be sure to change to a new directory first if you don't want to overwrite existing files._
