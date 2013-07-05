@@ -1,0 +1,28 @@
+{
+  "name": "threshold",
+  "version": "0.0.1",
+  "description": "The all-encompassing starting point for my front end dev projects using Grunt.",
+  "author": "Matt Przybylski <matt@reintroducing.com>",
+  "main": "js/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reintroducing/threshold.git"
+  },
+  "keywords": [
+    "matt przybylski",
+    "threshold",
+    "html",
+    "css",
+    "js",
+    "javascript",
+    "front end"
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-compass": "~0.2.0",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-jshint": "~0.6.0"
+  }
+}
