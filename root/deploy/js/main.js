@@ -2,7 +2,7 @@
 @author Matt Przybylski
 **/
 var main = (function($, document, window, undefined) {
-
+    'use strict';
 
     /* ----------------------------------------------------------------------------- *\
        Public Methods
@@ -31,5 +31,7 @@ var main = (function($, document, window, undefined) {
 
 // Initialize on document ready
 jQuery(document).ready(function() {
+    'use strict';
+
     main.init();
 });

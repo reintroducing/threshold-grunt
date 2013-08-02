@@ -111,11 +111,10 @@ module.exports = function(grunt) {
                 curly: true,
                 expr: true,
                 browser: true,
-                jquery: true,
                 devel: true,
                 maxerr: 50,
                 globals: {
-                    DISQUS: true
+                    jQuery: true
                 },
                 ignores: [
                     '<%= files.js %>/libs/**/*.js',
