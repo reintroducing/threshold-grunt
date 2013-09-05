@@ -8,6 +8,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-imageoptim');
 
     // initialize the configuration
     grunt.initConfig({
@@ -140,10 +141,19 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+
+        imageoptim: {
+            files: ['<%= files.img %>'],
+            options: {
+                jpegMini: true,
+                imageAlpha: true,
+                quitAfter: true
+            }
         }
     });
 
     // default task
     grunt.registerTask('default', ['watch']);
-    grunt.registerTask('deploy', ['compass:dist', 'cssmin', 'jshint', 'uglify']);
+    grunt.registerTask('deploy', ['compass:dist', 'cssmin', 'jshint', 'uglify', 'imageoptim']);
 };

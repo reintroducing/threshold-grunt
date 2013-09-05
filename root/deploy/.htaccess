@@ -46,7 +46,7 @@ AddEncoding gzip                       svgz
 AddType application/vnd.ms-fontobject  eot
 AddType application/x-font-ttf         ttf ttc
 AddType font/opentype                  otf
-AddType application/x-font-woff        woff
+AddType application/font-woff          woff
 
 # Assorted types
 AddType image/x-icon                        ico
@@ -62,9 +62,7 @@ AddType application/x-web-app-manifest+json webapp
 AddType text/x-vcard                        vcf
 AddType application/x-shockwave-flash       swf
 AddType text/vtt                            vtt
-
-# add htc mime type
-AddType text/x-component .htc
+AddType image/vnd.microsoft.icon            cur
 
 # ----------------------------------------------------------------------
 # Gzip compression

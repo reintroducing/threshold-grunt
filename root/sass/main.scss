@@ -48,20 +48,11 @@ textarea {
    UTILITIES
 \* ----------------------------------------------------------------------------- */
 
+/* From http://www.css-101.org/articles/clearfix/latest-new-clearfix-so-far.php */
 .clearfix {
-    *zoom: 1;
-
-    %cf-shared {
+    &:after {
         content: " ";
         display: table;
-    }
-
-    &:before {
-        @extend %cf-shared;
-    }
-
-    &:after {
-        @extend %cf-shared;
         clear: both;
     }
 }
