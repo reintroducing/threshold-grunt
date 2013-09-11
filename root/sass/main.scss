@@ -48,8 +48,7 @@ textarea {
    UTILITIES
 \* ----------------------------------------------------------------------------- */
 
-/* From http://www.css-101.org/articles/clearfix/latest-new-clearfix-so-far.php */
-.clearfix {
+%clearfix {
     &:after {
         content: " ";
         display: table;
@@ -57,8 +56,7 @@ textarea {
     }
 }
 
-/* From HTML5 Boilerplate - https://github.com/h5bp/html5-boilerplate/blob/master/css/main.css */
-.ir {
+%ir {
     background-color: transparent;
     border: 0;
     overflow: hidden;
@@ -69,6 +67,14 @@ textarea {
         width: 0;
         height: 150%;
     }
+}
+
+.clearfix {
+    @extend %clearfix;
+}
+
+.ir {
+    @extend %ir;
 }
 
 /* ----------------------------------------------------------------------------- *\
@@ -82,7 +88,7 @@ html {
 body {
     font: $body-font;
     color: $body-font-color;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* ----------------------------------------------------------------------------- *\

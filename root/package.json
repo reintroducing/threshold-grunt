@@ -25,6 +25,7 @@
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-jshint": "~0.6.0",
     "autoprefixer": "~0.5.20130629",
-    "grunt-autoprefixer": "~0.1.20130615"
+    "grunt-autoprefixer": "~0.1.20130615",
+    "grunt-imageoptim": "~1.2.12"
   }
 }

@@ -13,5 +13,7 @@ $link-hover-color: #fff;
    MIXINS
 \* ----------------------------------------------------------------------------- */
 
+@import "normalize";
+
 @import "mixins/rem";
 @import "mixins/opacity";
