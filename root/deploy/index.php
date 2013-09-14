@@ -15,7 +15,6 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <? if ($_SERVER["SERVER_NAME"] == $devServer || $_SERVER["SERVER_NAME"] == "localhost") : ?>
-        <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <? else : ?>
         <link rel="stylesheet" href="css/main.min.css">
@@ -28,7 +27,6 @@
 
         <? if ($_SERVER["SERVER_NAME"] == $devServer || $_SERVER["SERVER_NAME"] == "localhost") : ?>
         <script src="js/libs/jquery/jquery-2.0.3.min.js"></script>
-        <script src="js/libs/jquery/jquery-migrate-1.2.1.js"></script>
         <script src="js/main.js"></script>
         <? else : ?>
         <script src="js/main.min.js"></script>
