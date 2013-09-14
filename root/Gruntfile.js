@@ -2,6 +2,7 @@ module.exports = function(grunt) {
     'use strict';
 
     // load custom tasks
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -22,6 +23,15 @@ module.exports = function(grunt) {
             js: '<%= files.root %>/js',
             img: '<%= files.root %>/img',
             sourceMap: 'main.min.map'
+        },
+
+        connect: {
+            server: {
+                options: {
+                    port: 9000,
+                    base: '<%= files.root %>'
+                }
+            }
         },
 
         watch: {
@@ -154,6 +164,6 @@ module.exports = function(grunt) {
     });
 
     // default task
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['connect', 'watch']);
     grunt.registerTask('deploy', ['compass:dist', 'cssmin', 'jshint', 'uglify', 'imageoptim']);
 };
