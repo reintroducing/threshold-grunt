@@ -101,10 +101,7 @@ module.exports = function(grunt) {
 
         cssmin: {
             minify: {
-                src: [
-                    '<%= files.css %>/normalize.css',
-                    '<%= files.css %>/main.css'
-                ],
+                src: '<%= files.css %>/main.css',
                 dest: '<%= files.css %>/main.min.css'
             }
         },
