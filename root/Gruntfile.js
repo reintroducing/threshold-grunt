@@ -8,6 +8,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-imageoptim');
 
@@ -17,19 +18,18 @@ module.exports = function(grunt) {
 
         files: {
             grunt: 'Gruntfile.js',
-            root: 'deploy',
-            css: '<%= files.root %>/css',
+            build: '_build',
+            css: 'css',
             sass: 'sass',
-            js: '<%= files.root %>/js',
-            img: '<%= files.root %>/img',
+            js: 'js',
+            img: 'images',
             sourceMap: 'main.min.map'
         },
 
         connect: {
             server: {
                 options: {
-                    port: 9000,
-                    base: '<%= files.root %>'
+                    port: 9000
                 }
             }
         },
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
                 tasks: ['compass:dev']
             },
             markup: {
-                files: ['<%= files.root %>/**/*.{html,php}'],
+                files: ['**/*.{html,php}'],
                 options: {
                     livereload: true
                 }
@@ -67,25 +67,16 @@ module.exports = function(grunt) {
         compass: {
             dist: {
                 options: {
-                    sassDir: '<%= files.sass %>',
-                    cssDir: '<%= files.css %>',
-                    imagesDir: '<%= files.img %>',
-                    httpGeneratedImagesPath: '../img',
                     environment: 'production',
-                    outputStyle: 'compressed',
-                    debugInfo: false,
-                    noLineComments: true,
-                    force: true
+                    force: true,
+                    config: 'config.rb'
                 }
             },
             dev: {
                 options: {
-                    sassDir: '<%= files.sass %>',
-                    cssDir: '<%= files.css %>',
-                    imagesDir: '<%= files.img %>',
-                    httpGeneratedImagesPath: '../img',
-                    outputStyle: 'expanded',
-                    debugInfo: true
+                    environment: 'development',
+                    debugInfo: true,
+                    config: 'config.rb'
                 }
             }
         },
@@ -151,16 +142,29 @@ module.exports = function(grunt) {
         },
 
         imageoptim: {
-            files: ['<%= files.img %>'],
+            files: ['_build/images'],
+            // files: ['<%= files.img %>'],
             options: {
                 jpegMini: true,
                 imageAlpha: true,
                 quitAfter: true
+            }
+        },
+
+        copy: {
+            main: {
+                files: [
+                    {expand: true, src: '<%= files.css %>/**', dest: '<%= files.build %>'},
+                    {expand: true, src: '<%= files.js %>/**', dest: '<%= files.build %>'},
+                    {expand: true, src: '<%= files.img %>/**', dest: '<%= files.build %>'},
+                    {expand: true, src: ['**/*.{html,php}', '!node_modules/**'], dest: '<%= files.build %>'},
+                    {expand: true, src: '.htaccess', dest: '<%= files.build %>'}
+                ]
             }
         }
     });
 
     // default task
     grunt.registerTask('default', ['connect', 'watch']);
-    grunt.registerTask('deploy', ['compass:dist', 'cssmin', 'jshint', 'uglify', 'imageoptim']);
+    grunt.registerTask('deploy', ['compass:dist', 'cssmin', 'jshint', 'uglify', 'copy', 'imageoptim']);
 };
