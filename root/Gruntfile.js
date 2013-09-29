@@ -9,6 +9,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-imageoptim');
 
@@ -31,6 +32,12 @@ module.exports = function(grunt) {
                 options: {
                     port: 9000
                 }
+            }
+        },
+
+        open: {
+            dev: {
+                path: 'http://localhost:9000'
             }
         },
 
@@ -165,6 +172,6 @@ module.exports = function(grunt) {
     });
 
     // default task
-    grunt.registerTask('default', ['connect', 'watch']);
+    grunt.registerTask('default', ['connect', 'open', 'watch']);
     grunt.registerTask('deploy', ['compass:dist', 'cssmin', 'jshint', 'uglify', 'copy', 'imageoptim']);
 };
