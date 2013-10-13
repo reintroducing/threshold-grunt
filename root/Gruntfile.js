@@ -1,43 +1,55 @@
-module.exports = function(grunt) {
-    'use strict';
+'use strict';
 
-    // load custom tasks
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-open');
-    grunt.loadNpmTasks('grunt-autoprefixer');
-    grunt.loadNpmTasks('grunt-imageoptim');
+var LIVERELOAD_PORT = 35729,
+    lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT}),
+    mountFolder = function (connect, dir) {
+        return connect.static(require('path').resolve(dir));
+    };
+
+module.exports = function(grunt) {
+    // load all grunt tasks
+    require('load-grunt-tasks')(grunt);
+
+    var config = {
+        grunt: 'Gruntfile.js',
+        build: '_build',
+        dev: '',
+        css: 'css',
+        sass: 'sass',
+        js: 'js',
+        img: 'images',
+        sourceMap: 'main.min.map'
+    };
 
     // initialize the configuration
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-
-        files: {
-            grunt: 'Gruntfile.js',
-            build: '_build',
-            css: 'css',
-            sass: 'sass',
-            js: 'js',
-            img: 'images',
-            sourceMap: 'main.min.map'
-        },
+        files: config,
 
         connect: {
-            server: {
+            options: {
+                port: 9000,
+                hostname: 'localhost'
+            },
+            livereload: {
                 options: {
-                    port: 9000
+                    middleware: function(connect) {
+                        return [lrSnippet, mountFolder(connect, config.dev)];
+                    }
+                }
+            },
+            build: {
+                options: {
+                    middleware: function(connect) {
+                        return [mountFolder(connect, config.build)];
+                    }
                 }
             }
         },
 
         open: {
             dev: {
-                path: 'http://localhost:9000'
+                path: 'http://<%= connect.options.hostname %>:<%= connect.options.port %>'
             }
         },
 
@@ -66,7 +78,7 @@ module.exports = function(grunt) {
                 files: ['<%= files.css %>/**/*.css'],
                 tasks: ['autoprefixer'],
                 options: {
-                    livereload: true
+                    livereload: LIVERELOAD_PORT
                 }
             }
         },
@@ -149,8 +161,7 @@ module.exports = function(grunt) {
         },
 
         imageoptim: {
-            files: ['_build/images'],
-            // files: ['<%= files.img %>'],
+            files: ['<%= files.build %>/<%= files.img %>'],
             options: {
                 jpegMini: true,
                 imageAlpha: true,
@@ -171,7 +182,7 @@ module.exports = function(grunt) {
         }
     });
 
-    // default task
-    grunt.registerTask('default', ['connect', 'open', 'watch']);
-    grunt.registerTask('deploy', ['compass:dist', 'cssmin', 'jshint', 'uglify', 'copy', 'imageoptim']);
+     // default task
+    grunt.registerTask('default', ['connect:livereload', 'open', 'watch']);
+    grunt.registerTask('deploy', ['compass:dist', 'cssmin', 'jshint', 'uglify', 'copy', 'imageoptim', 'connect:build']);
 };
