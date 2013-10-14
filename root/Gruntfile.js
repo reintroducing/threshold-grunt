@@ -18,6 +18,7 @@ module.exports = function(grunt) {
         sass: 'sass',
         js: 'js',
         img: 'images',
+        compassSprites: 'sprite',
         sourceMap: 'main.min.map'
     };
 
@@ -40,9 +41,9 @@ module.exports = function(grunt) {
             },
             build: {
                 options: {
-                    middleware: function(connect) {
-                        return [mountFolder(connect, config.build)];
-                    }
+                    base: '<%= files.build %>',
+                    open: true,
+                    keepalive: true
                 }
             }
         },
@@ -112,7 +113,7 @@ module.exports = function(grunt) {
         cssmin: {
             minify: {
                 src: '<%= files.css %>/main.css',
-                dest: '<%= files.css %>/main.min.css'
+                dest: '<%= files.build %>/<%= files.css %>/main.min.css'
             }
         },
 
@@ -146,13 +147,13 @@ module.exports = function(grunt) {
                 mangle: false
             },
             deploy: {
-                options: {
-                    sourceMap: '<%= files.js %>/<%= files.sourceMap %>',
-                    sourceMappingURL: '<%= files.sourceMap %>',
-                    sourceMapPrefix: 1
-                },
+                // options: {
+                //     sourceMap: '<%= files.js %>/<%= files.sourceMap %>',
+                //     sourceMappingURL: '<%= files.sourceMap %>',
+                //     sourceMapPrefix: 1
+                // },
                 files: {
-                    '<%= files.js %>/main.min.js': [
+                    '<%= files.build %>/<%= files.js %>/main.min.js': [
                         '<%= files.js %>/libs/jquery/jquery-2.0.3.min.js',
                         '<%= files.js %>/*.js'
                     ]
@@ -161,7 +162,10 @@ module.exports = function(grunt) {
         },
 
         imageoptim: {
-            files: ['<%= files.build %>/<%= files.img %>'],
+            files: [
+                '<%= files.build %>/<%= files.img %>',
+                '!images/sprite/*.png'
+            ],
             options: {
                 jpegMini: true,
                 imageAlpha: true,
@@ -179,10 +183,15 @@ module.exports = function(grunt) {
                     {expand: true, src: '.htaccess', dest: '<%= files.build %>'}
                 ]
             }
+        },
+
+        clean: {
+            dist: ['<%= files.build %>'],
+            sprites: ['<%= files.build %>/<%= files.img %>/<%= files.compassSprites %>']
         }
     });
 
-     // default task
+    // default task
     grunt.registerTask('default', ['connect:livereload', 'open', 'watch']);
-    grunt.registerTask('deploy', ['compass:dist', 'cssmin', 'jshint', 'uglify', 'copy', 'imageoptim', 'connect:build']);
+    grunt.registerTask('deploy', ['clean:dist', 'compass:dist', 'cssmin', 'jshint', 'uglify', 'copy', 'clean:sprites', 'usemin', 'imageoptim', 'connect:build']);
 };
