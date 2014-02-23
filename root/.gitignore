@@ -1,0 +1,8 @@
+*.DS_Store
+.sass-cache
+.tmp
+.ftppass
+_internal
+_dist
+node_modules
+css/main.css
