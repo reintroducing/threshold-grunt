@@ -35,6 +35,7 @@
     "grunt-usemin": "~2.0.1",
     "connect-livereload": "~0.3.0",
     "load-grunt-tasks": "~0.1.0",
-    "time-grunt": "~0.1.1"
+    "time-grunt": "~0.1.1",
+    "jshint-stylish": "^0.1.5"
   }
 }
