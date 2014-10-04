@@ -1,8 +1,8 @@
 /*
- * grunt-init threshold
- * https://github.com/reintroducing/threshold
+ * grunt-init threshold-grunt
+ * https://github.com/reintroducing/threshold-grunt
  *
- * Copyright (c) 2013 Matt Przybylski <matt@reintroducing.com>
+ * Copyright (c) 2014 Matt Przybylski <matt@reintroducing.com>
  * Licensed under the MIT license.
  */
 

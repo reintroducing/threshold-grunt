@@ -166,6 +166,7 @@ module.exports = function(grunt) {
 
     // default task
     grunt.registerTask('default', [
+        'compass:dev',
         'connect:livereload',
         'open',
         'watch'

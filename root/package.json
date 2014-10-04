@@ -1,16 +1,17 @@
 {
-  "name": "threshold",
+  "name": "threshold-grunt",
   "version": "0.0.1",
   "description": "The all-encompassing starting point for my front end dev projects using Grunt.",
   "author": "Matt Przybylski <matt@reintroducing.com>",
   "main": "js/main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/reintroducing/threshold.git"
+    "url": "https://github.com/reintroducing/threshold-grunt.git"
   },
   "keywords": [
     "matt przybylski",
     "threshold",
+    "grunt",
     "html",
     "css",
     "js",
